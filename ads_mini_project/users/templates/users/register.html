@@ -1,0 +1,183 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootstrap 5 - Login Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="main-bg">
+  <!-- Login Form -->
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card shadow">
+          <div class="card-title text-center border-bottom">
+            <h2 class="p-3">User Registration</h2>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{% url 'user_register' %}">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label for="id_username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" maxlength="255" autocapitalize="none" autocomplete="username" autofocus="" required id="id_username">
+                    <label class="form-label" id="username_checking" hidden style="color: red;">Username has been taken</label>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password1" autocomplete="new-password" required id="id_password1">
+                </div>
+                <div class="mb-4">
+                    <label for="id_password2" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="password2" autocomplete="new-password" required id="id_password2">
+                </div>
+                <div class="mb-4">
+                  <label hidden style="color: red;" id="error_label">Password not same</label>
+                </div>
+                <div class="mb-4">
+                  <label style="color: red;" id="us_1">Username not taken.</label>
+                  <label style="color: red;" id="ps_1">Password must be at least 8 characters long.</label>
+                  <label style="color: red;" id="ps_2">Password must contain at least one lowercase letter.</label>
+                  <label style="color: red;" id="ps_3">Password must contain at least one uppercase letter.</label>
+                  <label style="color: red;" id="ps_4">Password must contain at least one number.</label>
+                  <label style="color: red;" id="ps_5">Password must contain at least one special character.</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-primary" id="register_btn" disabled>Register</button>
+                </div>
+            </form>
+            <div class="d-grid gap-2">
+              <a href="http://127.0.0.1:8000/login" class="btn btn-outline-secondary">Back to Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+
+
+
+
+      $("#id_password1, #id_password2").on('keyup', function () {
+        var password = $("#id_password1").val();
+        var confirmPassword = $("#id_password2").val();
+        var lowerCaseCheck = /[a-z]/g;
+        var upperCaseCheck = /[A-Z]/g;
+        var numberCheck = /\d/g;
+        var specialCharCheck = /[!@#$%^&*(),.?":{}|<>]/g;
+        var _changeInterval = null;
+        var validation = false;
+         ps_validation = false;
+
+        if(password == confirmPassword) {
+          if (password.length >= 8) {
+            validation = false;
+            document.getElementById('ps_1').style.color = 'green';
+          }
+          else{
+            validation = false;
+            document.getElementById('ps_1').style.color = 'red';
+          }
+
+          if (password.match(lowerCaseCheck)) {
+            validation = true;
+            document.getElementById('ps_2').style.color = 'green';
+          }
+          else{
+            validation = false;
+            document.getElementById('ps_2').style.color = 'red';
+          }
+
+          if (password.match(upperCaseCheck)){
+            validation = true;
+            document.getElementById('ps_3').style.color = 'green';
+          }
+          else{
+            validation = false;
+            document.getElementById('ps_3').style.color = 'red';
+          }
+
+          if (password.match(numberCheck)){
+            validation = true;
+            document.getElementById('ps_4').style.color = 'green';
+          }
+          else{
+            validation = false;
+            document.getElementById('ps_4').style.color = 'red';
+          }
+
+          if (password.match(specialCharCheck)){
+            validation = true;
+            document.getElementById('ps_5').style.color = 'green';
+          }
+          else{
+            validation = false;
+            document.getElementById('ps_5').style.color = 'red';
+          }
+
+          if (validation == true) {
+            $('#error_label').attr('hidden', true);
+            ps_validation = true;
+            if (us_validation == true && validation == true) {
+                $("#register_btn").prop("disabled", false);
+            }
+          } 
+        } 
+        else {
+          $("#register_btn").prop("disabled", true);
+          $('#error_label').removeAttr('hidden');
+        }
+
+    });
+
+    $(document).ready(function() {
+      var timer; // Declare a timer variable globally
+      form_validation = false
+      $('#id_username').on('keyup', function() {
+        us_validation = false
+        $("#register_btn").prop("disabled", true);
+        clearTimeout(timer); // Clear any pending timer
+
+        timer = setTimeout(function() {
+          $('#id_username').prop("disabled", true);
+          $.ajax({
+            url: "username_validation", 
+            type: "POST",
+            data: { 
+                username: $('#id_username').val(),
+                csrfmiddlewaretoken: "{{ csrf_token }}" 
+              },
+            success: function(response) {
+              if (response.check_status == 'Success') {
+                $('#id_username').prop("disabled", false);
+                us_validation = true;
+                if (us_validation == true && ps_validation == true) {
+                  $("#register_btn").prop("disabled", false);
+                }
+                $('#username_checking').attr('hidden', true);
+                document.getElementById('us_1').style.color = 'green';
+              }
+            
+              else {
+                $('#id_username').prop("disabled", false);
+                document.getElementById('us_1').style.color = 'red';
+                document.getElementById('username_checking').innerText = $('#id_username').val()+' has been taken';
+                $('#username_checking').removeAttr('hidden');
+              }
+            },
+            error: function(response) {
+              alert('error on validating username');
+            }
+          });
+        }, 2000);
+      });
+    });
+    </script>
+</body>
+
+</html>
