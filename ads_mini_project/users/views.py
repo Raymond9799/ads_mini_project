@@ -17,7 +17,6 @@ def user_login(request):
         print(f"here is the request: {request}")
         username = request.POST.get("username")
         password = request.POST.get("password")
-        print(f"here is the username: {username} and password: {password}")
         user = authenticate(request, username=username, password=password)
         print(user)
         if user:
@@ -55,7 +54,6 @@ def user_register(request):
 def username_validation(request):
     if request.method == "POST":
         username = request.POST.get("username")
-        print(f"here is the username: {username}")
         if User.objects.filter(username=username).exists():
             return JsonResponse({"check_status": "Failed"})
             #print("Username is taken")
