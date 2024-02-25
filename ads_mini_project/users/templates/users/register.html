@@ -75,6 +75,7 @@
          ps_validation = false;
 
         if(password == confirmPassword) {
+          $('#error_label').attr('hidden', true);
           if (password.length >= 8) {
             validation = false;
             document.getElementById('ps_1').style.color = 'green';
@@ -121,7 +122,6 @@
           }
 
           if (validation == true) {
-            $('#error_label').attr('hidden', true);
             ps_validation = true;
             if (us_validation == true && validation == true) {
                 $("#register_btn").prop("disabled", false);

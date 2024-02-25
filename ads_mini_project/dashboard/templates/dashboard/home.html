@@ -32,7 +32,7 @@
                             <select class="btn btn-secondary dropdown-toggle" aria-labelledby="dropdownMenuButton" id="dropdown_1">
                                 <option value="Samsung Galaxy S22 5G">Samsung Galaxy S22 5G</option>
                                 <option value="Samsung Galaxy S22+ 5G">Samsung Galaxy S22+ 5G</option>
-                                <option value="Apple iPhone 15">Samsung Galaxy S22 Ultra 5G</option>
+                                <option value="Samsung Galaxy S22 Ultra 5G">Samsung Galaxy S22 Ultra 5G</option>
                             </select>
                             VS
                             <select class="btn btn-secondary dropdown-toggle" aria-labelledby="dropdownMenuButton" id="dropdown_2">
@@ -52,19 +52,19 @@
             <!-- image -->
             <div class="row">
                 <div class="col-md-12">
+                    <img src="" class="img-fluid" alt="topic5" id="topic5" hidden>
+                </div>
+                <div class="col-md-6">
                     <img src="" class="img-fluid" alt="topic1" id="topic1" hidden>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <img src="" class="img-fluid" alt="topic2" id="topic2" hidden>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <img src="" class="img-fluid" alt="topic3" id="topic3" hidden>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <img src="" class="img-fluid" alt="topic4" id="topic4" hidden>
-                </div>
-                <div class="col-md-12">
-                    <img src="" class="img-fluid" alt="topic5" id="topic5" hidden>
                 </div>
             </div>
 
@@ -76,14 +76,30 @@
             <div style="text-align: center;">
                 <h1 id="wc_compare_h1" hidden><u>Word Cloud</u></h1>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <img src="" class="img-fluid" alt="WordCloud Comparison" id="wc_compare_1" hidden>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <img src="" class="img-fluid" alt="WordCloud Comparison" id="wc_compare_2" hidden>
+                    </div>
+                </div>
+            </div>
+            <!-- Positive and Negative trend -->
+            <div style="text-align: center;">
+                <h1 id="p_n_trend_compare_h1" hidden><u>Positive and Negative trend</u></h1>
+            </div>
             <div class="col-md-12">
                 <div>
-                    <img src="" class="img-fluid" alt="WordCloud Comparison" id="wc_compare_1" hidden>
+                    <img src="" class="img-fluid" alt="WordCloud Comparison" id="p_n_trend_compare_1" hidden>
                 </div>
             </div>
             <div class="col-md-12">
                 <div>
-                    <img src="" class="img-fluid" alt="WordCloud Comparison" id="wc_compare_2" hidden>
+                    <img src="" class="img-fluid" alt="WordCloud Comparison" id="p_n_trend_compare_2" hidden>
                 </div>
             </div>
         </div>
@@ -96,6 +112,22 @@
         $("#compare_btn_1").prop("disabled", true);
         // change the text of the button
         $("#compare_btn_1").text('Comparing...');
+
+        //hide all the figure
+        $('#topic1').attr('hidden', true);
+        $('#topic2').attr('hidden', true);
+        $('#topic3').attr('hidden', true);
+        $('#topic4').attr('hidden', true);
+        $('#topic5').attr('hidden', true);
+        $('#wc_compare_h1').attr('hidden', true);
+        $('#wc_compare_1').attr('hidden', true);
+        $('#wc_compare_2').attr('hidden', true);
+        $('#p_n_trend_compare_h1').attr('hidden', true);
+        $('#p_n_trend_compare_1').attr('hidden', true);
+        $('#p_n_trend_compare_2').attr('hidden', true);
+
+
+
         $.ajax({
         url: "display", // Replace with your actual URL
         type: "POST", // Change to "GET" if needed
@@ -106,6 +138,7 @@
             success: function(response) {
             // Handle the response
             if (response.status == 'True') {
+                console.log(response);
                 $("#compare_btn_1").text('Compare');
                 $("#compare_btn_1").prop("disabled", false);
                 $('#topic1').attr('src', response.img_1);
@@ -115,6 +148,8 @@
                 $('#topic5').attr('src', response.img_5);
                 $('#wc_compare_1').attr('src', response.img_6);
                 $('#wc_compare_2').attr('src', response.img_7);
+                $('#p_n_trend_compare_1').attr('src', response.img_8);
+                $('#p_n_trend_compare_2').attr('src', response.img_9);
                 
                 $('#topic1').removeAttr('hidden');
                 $('#topic2').removeAttr('hidden');
@@ -124,16 +159,20 @@
                 $('#wc_compare_h1').removeAttr('hidden');
                 $('#wc_compare_1').removeAttr('hidden');
                 $('#wc_compare_2').removeAttr('hidden');
+                $('#p_n_trend_compare_h1').removeAttr('hidden');
+                $('#p_n_trend_compare_1').removeAttr('hidden');
+                $('#p_n_trend_compare_2').removeAttr('hidden');
+
                 
             }
             else {
-                alert('Error occurred on rendering the figure. Please contact Admin.');
+                alert('Error occurred on rendering the figure. Please contact Admin.1');
                 window.location.reload();
             }
             
         },
         error: function(error) {
-            alert('Error occurred on rendering the figure. Please contact Admin.');
+            alert('Error occurred on rendering the figure 2. Please contact Admin.2');
             window.location.reload();
         }
         });
