@@ -1,7 +1,7 @@
 # ADS_Mini_Project: Samsung Mobile Phones review
 ## Description
 This Project is mainly combine of two parts. 
-- Data scraping which will scrape mobile phone reviews from https://www.gsmarena.com/
+- Data scraping which will scrape mobile phone reviews from https://www.gsmarena.com/ (source code is located at /ads_mini_project/scrapeddata)
 - Django project that will perform sentiment analysis and display the figure base on user selected models
 
 ---
