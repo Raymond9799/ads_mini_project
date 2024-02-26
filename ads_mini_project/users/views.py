@@ -11,7 +11,10 @@ from django.http import JsonResponse
 def index(request):
     return render(request, "users/login.html")
 
-def user_login(request):    
+def user_login(request):
+    """
+    this function is used to check if user inputted username and password is corect and redirect to dashboard page if the user is exists in DB
+    """    
     if request.method == "POST":
         
         print(f"here is the request: {request}")
@@ -28,14 +31,13 @@ def user_login(request):
     context = {}
     return redirect("login")
 
-
-    #if user not found
-    #show user not found
-
 def register(request):
     return render(request, "users/register.html")
 
 def user_register(request):
+    """
+    this function is used to register the user
+    """
     form = CreateUserForm(request.POST)
     if request.method == "Get":
         return render(request, "users/register.html")
@@ -52,6 +54,9 @@ def user_register(request):
 
 
 def username_validation(request):
+    """
+    this function will get the username from request and check if the username exists in database
+    """
     if request.method == "POST":
         username = request.POST.get("username")
         if User.objects.filter(username=username).exists():

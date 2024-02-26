@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import pandas as pd
 from django.conf import settings
@@ -12,7 +11,6 @@ from wordcloud import WordCloud
 import time
 
 # Create your views here.
-#@login_required
 def home(request):
     return render(request, "dashboard/home.html")
 
@@ -20,23 +18,10 @@ def display(request):
     if request.method == "POST":
         device_1_name = request.POST.get("device_1")
         device_2_name = request.POST.get("device_2")
-        print(f"here is the data: {device_1_name} from ajax")
-        print(f"here is the data: {device_2_name} from ajax")
 
-        
-
+        #get the class object
         dc = DeviceCompare()
         spec_img_path, img_path, word_cloud_path, p_n_trend_path = dc.controll_devicecomparepolarity(device_1_name, device_2_name)
-
-        print("==========")
-        print(spec_img_path)
-        print("\n")
-        print(img_path)
-        print("\n")
-        print(word_cloud_path)
-        print("\n")
-        print(p_n_trend_path)
-        print("==========")
         
         img_dict = {
             "status": "True",
@@ -50,8 +35,6 @@ def display(request):
             "img_8": p_n_trend_path[0],
             "img_9": p_n_trend_path[1]
         }
-
-        print(img_dict)
         
         return JsonResponse(img_dict)
     else:
@@ -70,6 +53,9 @@ class DeviceCompare:
 
     #controller for device comparison
     def controll_devicecomparepolarity(self,deviceName1, deviceName2):
+        """
+        this function is used to run each function to generate the figure
+        """
         device_list = [deviceName1, deviceName2]
         spec_img_path = []
         img_path = []
@@ -92,9 +78,10 @@ class DeviceCompare:
 
         return (spec_img_path,img_path,word_cloud_path,p_n_trend)
 
-
-    #compare two devices polarity
     def devicecomparepolarity(self,deviceName1, deviceName2, spec):
+        """
+        this function is used to compare the polarity of 2 devices
+        """
         try:
             matplotlib.use('Agg')
             fig, ax = plt.subplots(figsize=(10, 6))
@@ -140,8 +127,10 @@ class DeviceCompare:
             print(e)
             return f'/static/image/not_found.png'
 
-    #create word cloud
     def createworldcloud(self,deviceName):
+        """
+        this function is used to create word cloud for inputted device name
+        """
         try:
             matplotlib.use('Agg')
             # Create a WordCloud object
@@ -167,8 +156,10 @@ class DeviceCompare:
             print(e)
             return f'/static/image/not_found.png'
     
-    #positive and negative trend
     def post_neg_trend(self,device_name):
+        """
+        this function is used to create positive and negative trend for inputted device name
+        """
         launchdate = ""
         try:
             matplotlib.use('Agg')
