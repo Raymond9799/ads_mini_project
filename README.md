@@ -18,8 +18,8 @@ This Project is mainly combine of two parts.
     ```
     python manage.py runserver
     ```
-5. Go to your web browser and enter this URL - **http://127.0.0.1:8000/** or you can get the url from the terminal like screenshot below:
-![hints](read_me_images/ReadMe_hints.jpg)
+5. Go to your web browser and enter the URL. The URL you can get it from your terminal
+    ![hints](read_me_images/ReadMe_hints.jpg)
  
 
 ---
