@@ -19,7 +19,7 @@ This Project is mainly combine of two parts.
     python manage.py runserver
     ```
 5. Go to your web browser and enter this URL - **http://127.0.0.1:8000/** or you can get the url from the terminal like screenshot below:
-![hints](/ads_mini_project/read_me_images/ReadMe_hints.png)
+![hints](read_me_images/ReadMe_hints.jpg)
  
 
 ---
@@ -27,31 +27,31 @@ This Project is mainly combine of two parts.
 
 ## Screenshots
 ### Login Page
-![Login Page](/ads_mini_project/read_me_images/ads_login.png)
+![Login Page](read_me_images/ads_login.jpg)
 
 ### User Registration Page
-![User Registration Page](/ads_mini_project/read_me_images/ads_register.png)
+![User Registration Page](read_me_images/ads_register.jpg)
 
 ### User Registration Page - Username taken
-![User Registration Page - Username taken](/ads_mini_project/read_me_images/ads_register_username_taken.png)
+![User Registration Page - Username taken](read_me_images/ads_register_username_taken.jpg)
 
 ### User Registration Page - Invalid Password
-![User Registration Page - Invalid Password](/ads_mini_project/read_me_images/ads_register_password_not_same.png)
+![User Registration Page - Invalid Password](read_me_images/ads_register_password_not_same.jpg)
 
 ### User Registration Page - Valid Password 
-![User Registration Page - Valid Password ](/ads_mini_project/read_me_images/ads_register_password_valid.png)
+![User Registration Page - Valid Password ](read_me_images/ads_register_password_valid.jpg)
 
 ### User Registration Page - Registration succeeded
-![User Registration Page - Registration succeeded](/ads_mini_project/read_me_images/ads_register_success.png)
+![User Registration Page - Registration succeeded](read_me_images/ads_register_success.jpg)
 
 ### Dashboard
-![Dashboard](/ads_mini_project/read_me_images/ads_dashboard.png)
+![Dashboard](read_me_images/ads_dashboard.jpg)
 
 ### Dashboard - Models selection
-![Dashboard - Models selection](/ads_mini_project/read_me_images/ads_dashboard_model_selection.png)
+![Dashboard - Models selection](read_me_images/ads_dashboard_model_selection.jpg)
 
 ### Dashboard - Figures
-![Dashboard - Figures](/ads_mini_project/read_me_images/ads_dashboard_figure_1.png)
+![Dashboard - Figures](read_me_images/ads_dashboard_figure_1.jpg)
 
 ### Dashboard - Figures cont
-![Dashboard - Figures(cont)](/ads_mini_project/read_me_images/ads_dashboard_figure_2.png)
+![Dashboard - Figures(cont)](read_me_images/ads_dashboard_figure_2.jpg)
