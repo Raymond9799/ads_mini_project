@@ -51,6 +51,14 @@
             <br><br>
             <!-- image -->
             <div class="row">
+                <div style="text-align: center;">
+                    <h1 id="polarity_compare_h1" hidden><u>Polarity review</u></h1>
+                    <p id="polarity_compare_p" hidden>
+                        *How to intepreted this? <br>
+                        *The higher polarity means the comment is positive <br>
+                        *The higher the density means having higher numbers of user giving comments among that sentiment
+                    </p>
+                </div>
                 <div class="col-md-12">
                     <img src="" class="img-fluid" alt="topic5" id="topic5" hidden>
                 </div>
@@ -73,8 +81,13 @@
 
 
             <!-- Word cloud -->
+            
             <div style="text-align: center;">
                 <h1 id="wc_compare_h1" hidden><u>Word Cloud</u></h1>
+                <p id="wc_compare_p" hidden>
+                    *How to intepreted this?<br>
+                    *The Bigger size of the word means that word having high frequency appearing in user comment
+                </p>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -91,6 +104,11 @@
             <!-- Positive and Negative trend -->
             <div style="text-align: center;">
                 <h1 id="p_n_trend_compare_h1" hidden><u>Positive and Negative trend</u></h1>
+                <p id="p_n_trend_compare_p" hidden>
+                    *How to intepreted this?<br>
+                    *The green dotted line shows the launch date of respective Model<br>
+                    *The figure interpreted the trend of positive and negative comments before and after the model launched
+                </p>
             </div>
             <div class="col-md-12">
                 <div>
@@ -119,10 +137,14 @@
         $('#topic3').attr('hidden', true);
         $('#topic4').attr('hidden', true);
         $('#topic5').attr('hidden', true);
+        $('#polarity_compare_h1').attr('hidden', true);
+        $('#polarity_compare_p').attr('hidden', true);
         $('#wc_compare_h1').attr('hidden', true);
+        $('#wc_compare_p').attr('hidden', true);
         $('#wc_compare_1').attr('hidden', true);
         $('#wc_compare_2').attr('hidden', true);
         $('#p_n_trend_compare_h1').attr('hidden', true);
+        $('#p_n_trend_compare_p').attr('hidden', true);
         $('#p_n_trend_compare_1').attr('hidden', true);
         $('#p_n_trend_compare_2').attr('hidden', true);
 
@@ -141,6 +163,7 @@
                 console.log(response);
                 $("#compare_btn_1").text('Compare');
                 $("#compare_btn_1").prop("disabled", false);
+
                 $('#topic1').attr('src', response.img_1);
                 $('#topic2').attr('src', response.img_2);
                 $('#topic3').attr('src', response.img_3);
@@ -151,15 +174,21 @@
                 $('#p_n_trend_compare_1').attr('src', response.img_8);
                 $('#p_n_trend_compare_2').attr('src', response.img_9);
                 
+                $('#polarity_compare_h1').removeAttr('hidden');
+                $('#polarity_compare_p').removeAttr('hidden');
                 $('#topic1').removeAttr('hidden');
                 $('#topic2').removeAttr('hidden');
                 $('#topic3').removeAttr('hidden');
                 $('#topic4').removeAttr('hidden');
                 $('#topic5').removeAttr('hidden');
+
                 $('#wc_compare_h1').removeAttr('hidden');
+                $('#wc_compare_p').removeAttr('hidden');
                 $('#wc_compare_1').removeAttr('hidden');
                 $('#wc_compare_2').removeAttr('hidden');
+
                 $('#p_n_trend_compare_h1').removeAttr('hidden');
+                $('#p_n_trend_compare_p').removeAttr('hidden');
                 $('#p_n_trend_compare_1').removeAttr('hidden');
                 $('#p_n_trend_compare_2').removeAttr('hidden');
 

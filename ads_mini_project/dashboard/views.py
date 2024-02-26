@@ -92,6 +92,7 @@ class DeviceCompare:
             # self.df[self.df['PDName'] =='Samsung Galaxy S23 Ultra']
 
             if spec is None:
+                # Create a density plot of the polarity which is positive
                 self.df[(self.df['PDName'] ==f'{deviceName1}') & self.df['Cleansed']]['polarity'].plot(kind='kde', ax=ax, color='blue')
                 self.df[(self.df['PDName'] ==f'{deviceName2}') & self.df['Cleansed']]['polarity'].plot(kind='kde', ax=ax, color='red')
 
@@ -102,9 +103,9 @@ class DeviceCompare:
 
             # Set the title and labels
             if spec is None:
-                ax.set_title(f'Positive Reviews between 2 devices')
+                ax.set_title(f'Reviews between 2 devices')
             else:
-                ax.set_title(f'Positive Reviews between 2 devices on {spec}')
+                ax.set_title(f'Reviews between 2 devices on {spec}')
             ax.set_xlabel('Value')
             ax.set_ylabel('Density')
 
