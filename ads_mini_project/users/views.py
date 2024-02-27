@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import CreateUserForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+import base64
 
 # Create your views here.
 
@@ -16,19 +17,23 @@ def user_login(request):
     this function is used to check if user inputted username and password is corect and redirect to dashboard page if the user is exists in DB
     """    
     if request.method == "POST":
-        
+        context = {}
         print(f"here is the request: {request}")
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         print(user)
+
+        
         if user:
+            context['user'] = request.user
+            print(request.user)
             login(request, user)
-            return redirect("dashboard/")
+            return redirect(f"dashboard/", context)
         else:
             messages.info(request, 'Username or password is incorrect. Please try again!')
     
-    context = {}
+    
     return redirect("login")
 
 def register(request):
@@ -67,3 +72,8 @@ def username_validation(request):
             #print("Username is available")
             return JsonResponse({"check_status": "Success"})
             #return render(request, "users/register.html", {"check_status": "Success"})
+        
+def user_logout(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("login")

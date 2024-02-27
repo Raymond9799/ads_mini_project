@@ -14,7 +14,10 @@
             <a class="navbar-brand" href="/dashboard/">ADS-Mini_project_1</a>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="/login" class="btn btn-outline-dark">Logout</a>
+            <form method="POST" action="/logout">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-dark" value="Logout">
+            </form>
         </div>
     </nav>
 

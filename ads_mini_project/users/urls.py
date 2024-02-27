@@ -9,8 +9,9 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("user_register", views.user_register, name="user_register"),
     path("username_validation", views.username_validation, name="username_validation"),
+    path("logout", views.user_logout, name="logout"),
     
     #include the dashboard urls from dashboard app
-    path("dashboard", include("dashboard.urls")),
+    path("dashboard/", include("dashboard.urls")),
     
 ]

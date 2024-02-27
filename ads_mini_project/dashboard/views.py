@@ -7,12 +7,22 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import datetime as dt
+from django.contrib import messages
 from wordcloud import WordCloud
+from django.contrib.auth.decorators import login_required
 import time
 
 # Create your views here.
+@login_required
 def home(request):
-    return render(request, "dashboard/home.html")
+    print("here is user not logged in 1")
+    if request.user:
+        return render(request, "dashboard/home.html")
+    else:
+        print("here is user not logged in")
+        context = {}
+        context['login_message'] = "You are not logged in"
+        return render(request, "users/login.html", context)
 
 def display(request):
     if request.method == "POST":
