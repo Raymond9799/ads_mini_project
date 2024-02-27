@@ -5,6 +5,12 @@ This Project is mainly combine of two parts.
 - Django project that will perform sentiment analysis and display the figure base on user selected models
 
 ---
+## Pre-requisites (Data Scraping)
+1. Change directory to ads_mini_project/srapedata
+2. open the Scrape_Gsm_Arena.ipynb and run the command block.
+3. upon successful then all Samsung S22 and S23 user's review data from https://www.gsmarena.com/ will be scraped and store in excel format.
+4. 3 Excel files will be genrated and master file is the final product needed for dashboard project.
+
 ## Project Setup
 1. Create virtual environment using venv or anaconda and activate it.
 2. install requirements.txt by executing this command  
